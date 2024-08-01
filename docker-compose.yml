@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+
+  service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8080"
+    environment:
+      - DB_HOST=database
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=postgres
+      - REDIS_ADDRESS=redis:6379
+      - REDIS_PASSWORD
+      - SERVER_LISTEN=localhost:8080
+      - APP_NAME=poll-service
+    depends_on:
+      - database
+      - redis
+
+  database:
+    image: postgres:16.2
+    restart: always
+    ports:
+      - "5432:5432"
+    platform: linux/arm64
+    environment:
+      - DB_DATABASE=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD
+      - REDIS_PORT=6379
