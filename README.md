@@ -5,7 +5,11 @@ A RESTful service in Go that enables users to create polls, vote in real-time, a
 
 ## Prerequisites
 
-I have to install docker, go 1.22 and make tool before build the application
+You have to install docker, go 1.22 and make tool before build the application
+
+* docker
+* golang
+* make
 
 ## MacOS
 
